@@ -1,0 +1,108 @@
+PUT /songs
+{
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        "my_analyzer": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": ["stop"]
+        }
+      },
+      "filter": {
+        "stop": {
+          "type": "stop",
+          "stopwords": ["ගත්කරු", "රචකයා", "ලියන්නා", "ලියන", "රචිත", "ලියපු", "ලියව්‌ව", "රචනා", "රචක", "ලියන්", "ලිවූ", "ගායකයා", "ගයනවා", "ගායනා", "ගායනා", "ගැයු", "ගයන", "කිව්", "කිවු", "සංගීත", "සංගීතවත්", "සංගීතය", "වර්ගය", "වර්‍ගයේ", "වර්ගයේම", "වර්ගයේ", "වැනි", "ඇතුලත්", "ඇතුලු", "විදියේ", "විදිහේ", "හොඳම", "ජනප්‍රිය", "ප්‍රචලිත", "ප්‍රසිද්ධම", "හොදම", "ජනප්‍රියම", "ලස්සනම", "ගීත", "සිංදු", "ගී", "සින්දු"]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "songNameInEnglish": {
+        "type": "text",
+        "analyzer": "my_analyzer",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+              }
+          }
+      },
+      "songNameInSinahala": {
+        "type": "text",
+        "analyzer": "my_analyzer",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+              }
+          }
+      },
+      "artists": {
+        "type": "text",
+        "analyzer": "my_analyzer",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+           }
+          }
+      },
+      "lyricists": {
+        "type": "text",
+        "analyzer": "my_analyzer",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+               }
+          }
+      },
+      "musicComposers": {
+        "type": "text",
+        "analyzer": "my_analyzer",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+          }
+        }
+      },
+      "genres": {
+        "type": "text",
+        "analyzer": "my_analyzer",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+              }
+          }
+      },
+      "lyrics": {
+        "type": "text",
+        "analyzer": "my_analyzer",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+               }
+          }
+      },
+      "metaphors": {
+        "type": "nested",
+        "properties": {
+          "metaphor": {
+            "type": "text",
+            "analyzer": "my_analyzer"
+          },
+          "source": {
+            "type": "text",
+            "analyzer": "my_analyzer"
+          },
+          "target": {
+            "type": "text",
+            "analyzer": "my_analyzer"
+          },
+          "interpretation": {
+            "type": "text",
+            "analyzer": "my_analyzer"
+          }
+        }
+      }
+    }
+  }
+}
