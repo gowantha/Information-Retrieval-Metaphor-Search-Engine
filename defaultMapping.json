@@ -1,0 +1,125 @@
+{
+  "songs": {
+    "aliases": {},
+    "mappings": {
+      "properties": {
+        "artists": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "genres": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "lyricists": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "lyrics": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "metaphors": {
+          "properties": {
+            "interpretation": {
+              "type": "text",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            },
+            "metaphor": {
+              "type": "text",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            },
+            "source": {
+              "type": "text",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            },
+            "target": {
+              "type": "text",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            }
+          }
+        },
+        "musicComposers": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "songNameInEnglish": {
+          "type": "text"
+        },
+        "songNameInSinahala": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        }
+      }
+    },
+    "settings": {
+      "index": {
+        "routing": {
+          "allocation": {
+            "include": {
+              "_tier_preference": "data_content"
+            }
+          }
+        },
+        "number_of_shards": "1",
+        "provided_name": "songs",
+        "creation_date": "1673933744294",
+        "number_of_replicas": "1",
+        "uuid": "AElI-DYdSgOob8pWgkhfGA",
+        "version": {
+          "created": "8060099"
+        }
+      }
+    }
+  }
+}
