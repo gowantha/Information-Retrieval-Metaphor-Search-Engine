@@ -7,34 +7,12 @@ PUT /songs
           "type": "custom",
           "tokenizer": "standard",
           "filter": ["stop"]
-        },
-        "english_analyzer": {
-          "type": "custom",
-          "tokenizer": "standard",
-          "filter": ["lowercase", "english_ngram_filter"]
-        },
-        "sinhala_analyzer": {
-          "type": "custom",
-          "tokenizer": "icu_tokenizer",
-          "filter": ["stop", "sinhala_ngram_filter"]
         }
       },
       "filter": {
         "stop": {
           "type": "stop",
           "stopwords": ["ගත්කරු", "රචකයා", "ලියන්නා", "ලියන", "රචිත", "ලියපු", "ලියව්‌ව", "රචනා", "රචක", "ලියන්", "ලිවූ", "ගායකයා", "ගයනවා", "ගායනා", "ගායනා", "ගැයු", "ගයන", "කිව්", "කිවු", "සංගීත", "සංගීතවත්", "සංගීතය", "වර්ගය", "වර්‍ගයේ", "වර්ගයේම", "වර්ගයේ", "වැනි", "ඇතුලත්", "ඇතුලු", "විදියේ", "විදිහේ", "හොඳම", "ජනප්‍රිය", "ප්‍රචලිත", "ප්‍රසිද්ධම", "හොදම", "ජනප්‍රියම", "ලස්සනම", "ගීත", "සිංදු", "ගී", "සින්දු"]
-        },
-        "english_ngram_filter": {
-          "type": "edge_ngram",
-          "min_gram": "4",
-          "max_gram": "18",
-          "side": "front"
-        },
-        "sinhala_ngram_filter": {
-          "type": "edge_ngram",
-          "min_gram": "4",
-          "max_gram": "18",
-          "side": "front"
         }
       }
     }
@@ -43,7 +21,7 @@ PUT /songs
       "properties": {
         "Artists": {
           "type": "text",
-          "analyzer": "english_analyzer",
+          "analyzer": "my_analyzer",
           "fields": {
             "keyword": {
               "type": "keyword"
@@ -52,7 +30,7 @@ PUT /songs
         },
         "Genres": {
           "type": "text",
-          "analyzer": "english_analyzer",
+          "analyzer": "my_analyzer",
           "fields": {
             "keyword": {
               "type": "keyword"
@@ -61,7 +39,7 @@ PUT /songs
         },
         "Lyricists": {
           "type": "text",
-          "analyzer": "english_analyzer",
+          "analyzer": "my_analyzer",
           "fields": {
             "keyword": {
               "type": "keyword"
@@ -70,7 +48,7 @@ PUT /songs
         },
         "Lyrics": {
           "type": "text",
-          "analyzer": "sinhala_analyzer",
+          "analyzer": "my_analyzer",
           "fields": {
             "keyword": {
               "type": "keyword"
@@ -81,7 +59,7 @@ PUT /songs
           "properties": {
             "interpretation": {
               "type": "text",
-              "analyzer": "sinhala_analyzer",
+              "analyzer": "my_analyzer",
               "fields": {
                 "keyword": {
                   "type": "keyword"
@@ -90,7 +68,7 @@ PUT /songs
             },
             "Metaphor": {
               "type": "text",
-              "analyzer": "sinhala_analyzer",
+              "analyzer": "my_analyzer",
               "fields": {
                 "keyword": {
                   "type": "keyword"
@@ -99,7 +77,7 @@ PUT /songs
             },
             "Source": {
               "type": "text",
-              "analyzer": "sinhala_analyzer",
+              "analyzer": "my_analyzer",
               "fields": {
                 "keyword": {
                   "type": "keyword"
@@ -108,7 +86,7 @@ PUT /songs
             },
             "Target": {
               "type": "text",
-              "analyzer": "sinhala_analyzer",
+              "analyzer": "my_analyzer",
               "fields": {
                 "keyword": {
                   "type": "keyword"
@@ -119,7 +97,7 @@ PUT /songs
         },
         "Music Composers": {
           "type": "text",
-          "analyzer": "english_analyzer",
+          "analyzer": "my_analyzer",
           "fields": {
             "keyword": {
               "type": "keyword"
@@ -128,7 +106,7 @@ PUT /songs
         },
         "Song Name in English": {
           "type": "text",
-          "analyzer": "english_analyzer",
+          "analyzer": "my_analyzer",
           "fields": {
             "keyword": {
               "type": "keyword"
@@ -137,7 +115,7 @@ PUT /songs
         },
         "Song Name in Sinhala": {
           "type": "text",
-          "analyzer": "sinhala_analyzer",
+          "analyzer": "my_analyzer",
           "fields": {
             "keyword": {
               "type": "keyword"
@@ -147,6 +125,3 @@ PUT /songs
       }
     }
 }
-
-
-DELETE songs
