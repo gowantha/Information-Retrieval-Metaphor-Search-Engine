@@ -96,7 +96,7 @@ PUT /songs
       "properties": {
         "Artists": {
           "type": "text",
-          "analyzer": "english_analyzer",
+          "analyzer": "sinhala_analyzer",
           "fields": {
             "keyword": {
               "type": "keyword"
@@ -105,7 +105,7 @@ PUT /songs
         },
         "Genres": {
           "type": "text",
-          "analyzer": "english_analyzer",
+          "analyzer": "sinhala_analyzer",
           "fields": {
             "keyword": {
               "type": "keyword"
@@ -114,7 +114,7 @@ PUT /songs
         },
         "Lyricists": {
           "type": "text",
-          "analyzer": "english_analyzer",
+          "analyzer": "sinhala_analyzer",
           "fields": {
             "keyword": {
               "type": "keyword"
@@ -172,7 +172,7 @@ PUT /songs
         },
         "Music Composers": {
           "type": "text",
-          "analyzer": "english_analyzer",
+          "analyzer": "sinhala_analyzer",
           "fields": {
             "keyword": {
               "type": "keyword"

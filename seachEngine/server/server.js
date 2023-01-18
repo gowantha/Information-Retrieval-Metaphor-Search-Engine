@@ -7,7 +7,7 @@ const app = express();
 
 app.use(cors());
 
-const filterFields = ["Artists.keyword", "Lyricists.keyword", "Music Composers.keyword", "Genres.keyword", "Metaphors.Source.keyword", "Metaphors.Target.keyword"];
+const filterFields = ["Artists.keyword", "Lyricists.keyword", "Music Composers.keyword", "Genres.keyword", "Metaphors.Target.keyword"];
 
 app.get('/filters', (req, res) => {
     const filterFieldResults = {};
@@ -36,14 +36,14 @@ app.get('/filters', (req, res) => {
 
 
 app.get('/results', (req, res) => {
-    // queryWithFilters = req.params.searchQuery
-    // const queryWithFilters = {"search": "ජලය", "matchResults": ["Lyrics", "Lyricists"], "filters": {"Artists.keyword": [],  "Lyricists.keyword": [], "Music Composers.keyword": [], "Genres.keyword":[], "Metaphors.Source.keyword": [], "Metaphors.Target.keyword": []}}
-    const queryWithFilters = {"search": "", "matchResults": ["Lyrics", "Lyricists"], "filters": {"Artists.keyword": [],  "Lyricists.keyword": [], "Music Composers.keyword": [], "Genres.keyword":[], "Metaphors.Source.keyword": [], "Metaphors.Target.keyword": []}}
-
+    //const queryWithFilters = {"search": "ජලය", "matchResults": ["Lyrics", "Lyricists"], "filters": {"Artists.keyword": [],  "Lyricists.keyword": [], "Music Composers.keyword": [], "Genres.keyword":[], "Metaphors.Source.keyword": [], "Metaphors.Target.keyword": []}}
+    queryWithFilters = JSON.parse(req.query.searchQuery)
+    //console.log("params",queryWithFilters)
     const filter = [];
     var filterCount = 0;
     matchPhrase = {}
     for (let i=0; i < filterFields.length; i++) {
+        //console.log("i",queryWithFilters.filters)
         for (let j=0; j < queryWithFilters.filters[filterFields[i]].length; j++) {
             matchPhrase = {}
             matchPhrase[filterFields[i]] = queryWithFilters.filters[filterFields[i]][j]
@@ -54,10 +54,8 @@ app.get('/results', (req, res) => {
         }
     }
 
-
-
     const should = [];
-    if (queryWithFilters.search != ""){
+    if(queryWithFilters.search != ""){
         var shouldCount = 0;
         for (let i=0; i < queryWithFilters.matchResults.length; i++) {
             match = {}
@@ -66,30 +64,39 @@ app.get('/results', (req, res) => {
                 "match": match
                 }
                 shouldCount++;
+        }
     }
+    
+    var must = []
+
+    if(queryWithFilters.search == ""){
+        must = {"match_all": {}}
     }
-      
+
     const bool = {
-        "must": [], 
+        "must": must, 
         "filter": filter,
         "should": should,
         "must_not": []
-      };
+    };
   
     async function sendESRequest() {
+        console.log("bool",JSON.stringify(bool))
         const body = await client.search({
         index: 'songs',
         body: {
-            size: 300,
+            min_score: 0.5,
+            size: 200,
             query: {
                 "bool": bool
             },
         },
         });
-        console.log(bool)
         res.json(body.hits.hits);
     }
     sendESRequest();
+
+  
 });
 
 const PORT = process.env.PORT || 3001;
