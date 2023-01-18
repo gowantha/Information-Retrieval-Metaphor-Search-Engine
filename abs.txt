@@ -16,7 +16,7 @@ PUT /songs
         "sinhala_analyzer": {
           "type": "custom",
           "tokenizer": "icu_tokenizer",
-          "filter": ["stop", "sinhala_ngram_filter"]
+          "filter": ["synonyms", "stop", "sinhala_ngram_filter"]
         }
       },
       "filter": {
@@ -35,6 +35,10 @@ PUT /songs
           "min_gram": "4",
           "max_gram": "18",
           "side": "front"
+        },
+        "synonyms": {
+          "type": "synonym",
+          "synonyms_path": "synonym.txt"
         }
       }
     }
